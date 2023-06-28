@@ -1,5 +1,5 @@
 <!--- the logo -->
-<center><img src="assets/turbocor-logo.png" height=100></center>  
+<center><img src="assets/turbocorLogo.png" height=100></center>  
 
 This repository stores all the pre-processing and post-processing code used in the SURFsara funded project titled `Unraveling the Turbulence Dynamics: Investigating Wave-Induced Turbulence over Corals [EINF-6125]` or in short `TURBOCOR`.
 
