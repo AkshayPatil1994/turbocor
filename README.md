@@ -1,7 +1,7 @@
 <!--- the logo -->
-<center><img src="assets/turcor-logo.png" height=100></center>  
+<center><img src="assets/turbocor-logo.png" height=100></center>  
 
-This repository stores all the pre-processing and post-processing code used in the SURFsara funded project titled `Unraveling the Turbulence Dynamics: Investigating Wave-Induced Turbulence over Corals [EINF-6125]` or in short `TURCOR`.
+This repository stores all the pre-processing and post-processing code used in the SURFsara funded project titled `Unraveling the Turbulence Dynamics: Investigating Wave-Induced Turbulence over Corals [EINF-6125]` or in short `TURBOCOR`.
 
 ## Requirements
 To enable swift error-free runtime environments, you can create a python environment and install the required libraries as shown below.
