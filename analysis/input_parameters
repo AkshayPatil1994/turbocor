@@ -1,0 +1,12 @@
+! Name of the fields to be read [Do not add space before the fields]
+'/mnt/storage2/dopamine/turcor/c1/run/fields/channel_test'
+! Nx Ny Nz
+514 129 514
+! startIndex endIndex writeInterval
+500 500 50
+! Wave Period (s), Time Step size (s), Number of Wave phases per wave Period
+5.0  5e-3  20
+! If the wall is rough then intrinsic average is computed else superficial avg is computed
+1
+! Location of the masking file (U,V,W,P)
+'/mnt/storage2/dopamine/turcor/c1/run/'

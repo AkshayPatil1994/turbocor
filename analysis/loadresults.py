@@ -1,6 +1,3 @@
-#
-#
-#
 from functions import readField, readmask
 import matplotlib.pyplot as plt
 import numpy as np

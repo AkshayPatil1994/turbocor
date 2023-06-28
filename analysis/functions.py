@@ -2,6 +2,7 @@
 # Import all libraries
 # 
 import numpy as np
+import datetime
 #
 # Define the function to read the binary snapshot
 #
@@ -66,6 +67,80 @@ def readmask(filein,n):
     mask = np.fromfile(fid, dtype='<f8', count=n[0]*n[1]*n[2]).reshape(n,order='F')
     
     return mask
+#
+# Read input parameters from file
+#
+def readinput(infile='input_parameters'):
+    '''
+        This function reads the file inputfile that sets the analysis parameters
+    INPUT
+        infile:     [string, Optional] Name and location of the inputfile. Default value `input_parameters`
+    OUTPUT
+        fileloc:    [string] Name and location of the result files
 
+    '''
+    myinpf = open(infile, "r")
+    dummy = myinpf.readline()
+    fileloc = myinpf.readline()
+    fileloc = fileloc.strip()
+    fileloc = fileloc[1:-1]
+    dummy = myinpf.readline()
+    tempread = myinpf.readline()
+    data = tempread.split(" ")
+    [Nx,Ny,Nz] = map(int,data)
+    dummy = myinpf.readline()
+    tempread = myinpf.readline()
+    data = tempread.split(" ")
+    [sind,eind,interval] = map(int,data)
+    dummy = myinpf.readline()
+    tempread = myinpf.readline()
+    data = tempread.split(" ")
+    Tw, dt, nphases = float(data[0]), float(data[2]), int(data[4])
+    dummy = myinpf.readline()
+    tempread = myinpf.readline()
+    data = tempread.split(" ")
+    isWallRough = int(data[0])
+    dummy = myinpf.readline()
+    maskloc = myinpf.readline()
+    maskloc = maskloc.strip()
+    maskloc = maskloc[1:-1]
+    myinpf.close()
 
+    # Print summary of the key parameters
+    print("- - - - - - - - - - - - - - ")
+    print("Input File Summary......... ")
+    print("Nx = %d | Ny = %d | Nz = %d"%(Nx,Ny,Nz))
+    print("start = %d | end = %d | interval = %d"%(sind,eind,interval))
+    print("Tw = %f | dt = %f | nphases = %d"%(Tw,dt,nphases))
+    print("Wall rough = %d "%(isWallRough))
+    print("- - - - - - - - - - - - - - ")
+    return fileloc, maskloc, Nx, Ny, Nz, sind, eind, interval, Tw, dt, nphases, isWallRough
+#
+# Mask the velocity and pressure data
+#
+def maskdata(indata,maskdata):
+    '''
+        This function masks the `indata` using the `maskdata` array
+    INPUT
+        indata:     [3D numpy array] Input data that needs to be masked
+        maskdata:   [3D numpy array] Masking array
+    OUTPUT
+        indata:     [3D numpy array] Input data masked in place
+    '''
+    indata[maskdata==0] = np.nan
 
+    return indata
+#
+# Welcome message for analysis
+#
+def welcomemessage():
+    '''
+        This function prints a welcome message
+    INPUT
+        None
+    OUTPUT
+        I/O to screen
+    '''
+    print("*** Dopamine sequence starting ***")
+    mytime = datetime.datetime.now()
+    print("Sequence started on: %s"%(mytime))
