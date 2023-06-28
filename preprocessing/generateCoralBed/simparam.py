@@ -2,8 +2,8 @@ import math
 #
 # Setup simulation parameters
 #
-fldsize = 0.513             # Size of each 3D array [GB]
-wclkperdt = 2.5             # Wall clock time per iteration [s]
+fldsize = 1.1           # Size of each 3D array [GB]
+wclkperdt = 2.5         # Wall clock time per iteration [s]
 dt = 5e-3	            # Time step size [s]
 Tw = 5		            # Wave Period [s]
 Nwaves = 40	            # Number of wave period
@@ -27,7 +27,7 @@ print("Total Simulation Time: %f seconds"%(treal))
 print("Results saved every %f seconds"%(tsavetime))
 print("- - - - - -")
 print("Simulation will have %d snapshots of 3D data"%(totsnaps))
-print("Estimated storage %f GB per field, total storage requried %f GB"%(totfldsize,totfldsize*4))
+print("Estimated storage %f GB per field"%(totfldsize))
 print("Nsaves: %d"%(nitersave))
 print("Niters: %d"%(ntotiters))
 print("Simulation wall lock time: %f hours .or. %f days"%(simwallt_sec/3600,(simwallt_sec/3600)/24))

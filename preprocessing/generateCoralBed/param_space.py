@@ -8,14 +8,14 @@ from functions import *
 #
 # User input data
 #
-Rew = [351,3990]                        # Wave Reynolds number
-Aks = [1,10]                            # Relative Roughness
+Rew = [351,3990]                         # Wave Reynolds number
+Aks = [0.5,1]                            # Relative Roughness
 Tw = [5.0,15.0]                          # Wave period is seconds 
-nu = 1e-6                               # Kinematic Vicosity
+nu = 1e-6                                # Kinematic Vicosity
 #
 # ComputeIt might be that parallelisation  some preliminary parameters
 #
-omega = 2*np.pi*pow(np.array(Tw),-1)   # Calculate wave frequency
+omega = 2*np.pi*pow(np.array(Tw),-1)    # Calculate wave frequency
 Ub = []                                 # Create wave velocity list
 ks = []                                 # Create roughness height list
 #
