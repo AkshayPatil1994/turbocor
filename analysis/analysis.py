@@ -5,7 +5,7 @@ import os
 import time
 import datetime
 #
-# Setup input parameters
+# Read input parameters
 #
 stime = time.time()
 welcomemessage()
@@ -50,15 +50,19 @@ for iter in findices:
     W = maskdata(W,Wmask)
     P = maskdata(P,Pmask)
     # Compute Statistics
-    Uplan[:,iterind] = np.mean(U,axis=(0,2))
-    uprime = U - Uplan[np.newaxis,:,iterind,np.newaxis] 
-    # Interpolate U and V to cell centers
+    Uplan[:,iterind] = np.nanmean(U,axis=(0,2))
+    dummy0 = Uplan[:,iterind]
+    uprime = U[:,:,:] - dummy0[np.newaxis,:,np.newaxis] 
+    # Interpolate U, V, and W to cell centers
     dummy1 = interpolate_x(uprime)
     dummy2 = interpolate_y(V)
+    dummy3 = interpolate_z(W)
     uvplan[0:-1,iterind] = np.mean(dummy1[:,0:-1,:]*dummy2[0:-1,:,:],axis=(0,2))
     urms[:,iterind] = np.sqrt(np.mean(uprime**2,axis=(0,2)))
-    vrms[:,iterind] = np.sqrt(np.mean(V**2,axis=(0,2)))
-    wrms[:,iterind] = np.sqrt(np.mean(W**2,axis=(0,2)))
+    vrms[:,iterind] = np.sqrt(np.mean(dummy2**2,axis=(0,2)))
+    wrms[:,iterind] = np.sqrt(np.mean(dummy3**2,axis=(0,2)))
+    # Finalise the time step
+    iterind += 1
     eitime = time.time()
     print("File channel_test.%d done in %f s. . ."%(iter,eitime-sitime))
 # Write data to file
