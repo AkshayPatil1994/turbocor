@@ -3,7 +3,7 @@
 ! Nx Ny Nz
 514 129 514
 ! startIndex endIndex writeInterval
-500 500 50
+500 1000 50
 ! Wave Period (s), Time Step size (s), Number of Wave phases per wave Period
 5.0  5e-3  20
 ! If the wall is rough then intrinsic average is computed else superficial avg is computed

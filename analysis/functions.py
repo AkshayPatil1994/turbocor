@@ -144,3 +144,19 @@ def welcomemessage():
     print("*** Dopamine sequence starting ***")
     mytime = datetime.datetime.now()
     print("Sequence started on: %s"%(mytime))
+#
+# Graceful exit message
+#
+def gracefulexit(stime,etime):
+    '''
+        This function prints an exit message
+    INPUT
+        stime:      [float] Starting time of the analysis
+        etime:      [float] Ending time of the analysis
+    OUTPUT
+        I/O to screen
+    '''
+    print("- - - - - - - - - - - - - - ")
+    print("Ending analysis time loop on: %s"%(datetime.datetime.now()))
+    print("Total Analysis Time: %f hours"%((etime-stime)/3600))
+    print("*** Dopamine squence analysed ***")
