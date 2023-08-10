@@ -176,7 +176,7 @@ def interpolate_y(uin):
     nusize = np.shape(uin)
     uout = np.zeros(nusize)
     
-    uout[0:nusize[0],0:nusize[2]-1,0:nusize[2]] = 0.5*(uin[:,0:nusize[1]-1,:]+uin[:,1:nusize[2],:])
+    uout[0:nusize[0],0:nusize[1]-1,0:nusize[2]] = 0.5*(uin[:,0:nusize[1]-1,:]+uin[:,1:nusize[1],:])
 
     return uout
 
