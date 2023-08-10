@@ -131,6 +131,56 @@ def maskdata(indata,maskdata):
 
     return indata
 #
+# Interpolate array in x [Copied from Lozano-Duran's code]
+#
+def interpolate_x(uin):
+    '''
+        This function interpolates the array from cell face to cell center in the X-direction
+    INPUT
+        uin:    [3D numpy array] Input array to interpolate 
+    OUTPUT
+        uout:   [3D numpy array] Output array
+    '''
+    nusize = np.shape(uin)
+    uout = np.zeros(nusize)
+    uout[0:nusize[0]-1,0:nusize[1],0:nusize[2]] = 0.5*(uin[0:nusize[0]-1,:,:]+uin[1:nusize[0],:,:])
+
+    return uout
+#
+# Interpolate array in z [Copied from Lozano-Duran's code]
+#
+def interpolate_z(uin):
+    '''
+        This function interpolates the array from cell face to cell center in the Z-direction
+    INPUT
+        uin:    [3D numpy array] Input array to interpolate 
+    OUTPUT
+        uout:   [3D numpy array] Output array
+    '''
+    nusize = np.shape(uin)
+    uout = np.zeros(nusize)
+    uout[0:nusize[0],0:nusize[1],0:nusize[2]-1] = 0.5*(uin[:,:,0:nusize[2]-1]+uin[:,:,1:nusize[2]])
+
+    return uout
+#
+# Interpolate array in y [Copied from Lozano-Duran's code]
+#
+def interpolate_y(uin):
+    '''
+        Interpolate the array in the Y-direction
+    INPUT
+        uin:    [3D numpy array] Input array to be interpolated¯
+    OUTPUT
+        uout:   [3D numpy array] Output array
+    '''
+    nusize = np.shape(uin)
+    uout = np.zeros(nusize)
+    
+    uout[0:nusize[0],0:nusize[2]-1,0:nusize[2]] = 0.5*(uin[:,0:nusize[1]-1,:]+uin[:,1:nusize[2],:])
+
+    return uout
+
+#
 # Welcome message for analysis
 #
 def welcomemessage():
