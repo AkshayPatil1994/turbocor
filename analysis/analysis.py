@@ -51,9 +51,9 @@ for iter in findices:
     Uplan[:,iterind] = np.mean(U,axis=(0,2))
     uprime = U - Uplan[np.newaxis,:,iterind,np.newaxis] 
     # Interpolate U and V to cell centers
-    uprime = interpolate_x(uprime)
-    V = interpolate_y(V)
-    uvplan[:,iterind] = np.mean(uprime*V,axis=(0,2))
+    dummy1 = interpolate_x(uprime)
+    dummy2 = interpolate_y(V)
+    uvplan[:,iterind] = np.mean(dummy1[:,0:-2,:]*dummy2[0:-2,:,:],axis=(0,2))
     eitime = time.time()
     print("File channel_test.%d done in %f s . . ."%(iter,eitime-sitime))
 # Write data to file
