@@ -34,8 +34,10 @@ print("All masks read in %f seconds...."%(emtime-smtime))
 iterind = 0                 # Iteration placeholder
 Uplan = np.zeros([nusize[1],len(findices)])
 uvplan = np.zeros([nusize[1],len(findices)])
+urms = np.zeros([nusize[1],len(findices)])
+vrms = np.zeros([nvsize[1],len(findices)])
+wrms = np.zeros([nwsize[1],len(findices)])
 uprime = np.zeros(nusize)
-
 # Loop over all files and analyse
 print("Starting analysis time loop at %s"%(datetime.datetime.now()))
 for iter in findices:
@@ -53,7 +55,10 @@ for iter in findices:
     # Interpolate U and V to cell centers
     dummy1 = interpolate_x(uprime)
     dummy2 = interpolate_y(V)
-    uvplan[:,iterind] = np.mean(dummy1[:,0:-2,:]*dummy2[0:-2,:,:],axis=(0,2))
+    uvplan[0:-1,iterind] = np.mean(dummy1[:,0:-1,:]*dummy2[0:-1,:,:],axis=(0,2))
+    urms[:,iterind] = np.sqrt(np.mean(uprime**2,axis=(0,2)))
+    vrms[:,iterind] = np.sqrt(np.mean(V**2,axis=(0,2)))
+    wrms[:,iterind] = np.sqrt(np.mean(W**2,axis=(0,2)))
     eitime = time.time()
     print("File channel_test.%d done in %f s . . ."%(iter,eitime-sitime))
 # Write data to file

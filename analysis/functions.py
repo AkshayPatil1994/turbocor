@@ -108,7 +108,7 @@ def readinput(infile='input_parameters'):
 
     # Print summary of the key parameters
     print("- - - - - - - - - - - - - - ")
-    print("Input File Summary......... ")
+    print("Input File Summary. . .")
     print("Nx = %d | Ny = %d | Nz = %d"%(Nx,Ny,Nz))
     print("start = %d | end = %d | interval = %d"%(sind,eind,interval))
     print("Tw = %f | dt = %f | nphases = %d"%(Tw,dt,nphases))
