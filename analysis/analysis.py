@@ -29,7 +29,7 @@ Wmask = readmask(maskin,nwsize)
 maskin = maskloc+'Pmask_in'
 Pmask = readmask(maskin,npsize)
 emtime = time.time()
-print("All masks read in %f seconds...."%(emtime-smtime))
+print("All masks read in %f seconds. . ."%(emtime-smtime))
 # Initialise all result arrays
 iterind = 0                 # Iteration placeholder
 Uplan = np.zeros([nusize[1],len(findices)])
@@ -60,10 +60,15 @@ for iter in findices:
     vrms[:,iterind] = np.sqrt(np.mean(V**2,axis=(0,2)))
     wrms[:,iterind] = np.sqrt(np.mean(W**2,axis=(0,2)))
     eitime = time.time()
-    print("File channel_test.%d done in %f s . . ."%(iter,eitime-sitime))
+    print("File channel_test.%d done in %f s. . ."%(iter,eitime-sitime))
 # Write data to file
+print("- - - - - - - - - - - - - - ")
 print("Writing analysis results to file. . .")
-
+np.savetxt('Uplan.dat',Uplan)
+np.savetxt('uvplan.dat',uvplan)
+np.savetxt('urms.dat',urms)
+np.savetxt('vrms.dat',vrms)
+np.savetxt('wrms.dat',wrms)
 # Exit message
 etime=time.time()
 gracefulexit(stime,etime)
