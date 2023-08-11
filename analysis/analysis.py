@@ -57,10 +57,10 @@ for iter in findices:
     dummy1 = interpolate_x(uprime)
     dummy2 = interpolate_y(V)
     dummy3 = interpolate_z(W)
-    uvplan[0:-1,iterind] = np.mean(dummy1[:,0:-1,:]*dummy2[0:-1,:,:],axis=(0,2))
-    urms[:,iterind] = np.sqrt(np.mean(uprime**2,axis=(0,2)))
-    vrms[:,iterind] = np.sqrt(np.mean(dummy2**2,axis=(0,2)))
-    wrms[:,iterind] = np.sqrt(np.mean(dummy3**2,axis=(0,2)))
+    uvplan[0:-1,iterind] = np.nanmean(dummy1[:,0:-1,:]*dummy2[0:-1,:,:],axis=(0,2))
+    urms[:,iterind] = np.sqrt(np.nanmean(uprime**2,axis=(0,2)))
+    vrms[:,iterind] = np.sqrt(np.nanmean(dummy2**2,axis=(0,2)))
+    wrms[:,iterind] = np.sqrt(np.nanmean(dummy3**2,axis=(0,2)))
     # Finalise the time step
     iterind += 1
     eitime = time.time()
