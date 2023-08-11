@@ -11,7 +11,7 @@ stime = time.time()
 welcomemessage()
 [fileloc, maskloc, Nx, Ny, Nz, sind, eind, interval, Tw, dt, nphases, isWallRough] = readinput()
 # Setup preliminary and auxiliary data
-findices = np.arange(sind,eind,interval)
+findices = np.arange(sind,eind+interval,interval)
 datasize = len(findices)
 # Define the global array sizes
 nusize = [Nx,Ny+1,Nz+1]
