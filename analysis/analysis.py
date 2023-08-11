@@ -39,7 +39,7 @@ vrms = np.zeros([nvsize[1],len(findices)])
 wrms = np.zeros([nwsize[1],len(findices)])
 uprime = np.zeros(nusize)
 # Loop over all files and analyse
-print("Starting analysis time loop at %s with %d files..."%(datetime.datetime.now(),len(findices)))
+print("Starting analysis loop at %s with %d files. . ."%(datetime.datetime.now(),len(findices)))
 for iter in findices:
     sitime = time.time()
     filename = str(str(fileloc)+'.'+str(iter))
