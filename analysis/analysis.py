@@ -39,7 +39,7 @@ vrms = np.zeros([nvsize[1],len(findices)])
 wrms = np.zeros([nwsize[1],len(findices)])
 uprime = np.zeros(nusize)
 # Loop over all files and analyse
-print("Starting analysis time loop at %s"%(datetime.datetime.now()))
+print("Starting analysis time loop at %s with %d files..."%(datetime.datetime.now(),len(findices)))
 for iter in findices:
     sitime = time.time()
     filename = str(str(fileloc)+'.'+str(iter))
@@ -64,16 +64,15 @@ for iter in findices:
     # Finalise the time step
     iterind += 1
     eitime = time.time()
-    print("File channel_test.%d done in %f s. . ."%(iter,eitime-sitime))
+    print("File %d/%d | channel_test.%d done in %f s. . ."%(iterind,len(findices),iter,eitime-sitime))
 # Write data to file
 print("- - - - - - - - - - - - - - ")
 print("Writing analysis results to file. . .")
 np.savetxt('Uplan.dat',Uplan)
-np.savetxt('uvplan.dat',uvplan)
+np.savetxt('uv.dat',uvplan)
 np.savetxt('urms.dat',urms)
 np.savetxt('vrms.dat',vrms)
 np.savetxt('wrms.dat',wrms)
 # Exit message
 etime=time.time()
 gracefulexit(stime,etime)
-
