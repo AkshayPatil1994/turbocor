@@ -221,7 +221,21 @@ def allgradient(u,v,w,x,y,z):
     dudz[:,:,-1], dvdx[:,:,-1], dwdx[:,:,-1] = dudx[:,:,-2], dvdx[:,:,-2], dwdx[:,:,-2]
 
     return dudx, dvdx, dwdx, dudy, dvdy, dwdy, dudz, dvdz, dwdz 
+#
+# Compute Turbulent Kinetic Energy Dissipation Rate
+#
+def tkedissipation(kvisc,dudx,dudy,dudz,dvdx,dvdy,dvdz,dwdx,dwdy,dwdz):
+    '''
+        This function computes the turbulent kinetic energy dissipation rate
+    INPUT
+        kvisc:      [3D numpy arrays] Kinetmatic viscosity in m^2/s
+        djui:       [3D numpy arrays] Gradients in all directions
+    OUTPUT
+        epsilon:    [3D numpy array] TKE dissipation rate
+    '''
+    epsilon = 0.5*kvisc*(dudx**2 + dudy**2 + dudz**2 + dvdx**2 + dvdy**2 + dvdz**2 + dwdx**2 + dwdy**2 + dwdz**2)
 
+    return epsilon
 #
 # Welcome message for analysis
 #

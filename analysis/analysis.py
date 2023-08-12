@@ -1,11 +1,11 @@
 import numpy as np
 from functions import welcomemessage, gracefulexit, readField, readmask, readinput, maskdata, \
-                      interpolate_x, interpolate_y, interpolate_z, allgradient
+                      interpolate_x, interpolate_y, interpolate_z, allgradient, tkedissipation                      
 import os
 import time
 import datetime
 # Save data prompt
-savedata = 0
+savedata = 1
 #
 # Read input parameters
 #
@@ -39,6 +39,8 @@ uvplan = np.zeros([nusize[1],len(findices)])
 urms = np.zeros([nusize[1],len(findices)])
 vrms = np.zeros([nvsize[1],len(findices)])
 wrms = np.zeros([nwsize[1],len(findices)])
+tke = np.zeros([Ny,len(findices)])
+epsilon = np.zeros([Ny,len(findices)])
 uprime = np.zeros(nusize)
 # Loop over all files and analyse
 print("Starting analysis loop at %s with %d files. . ."%(datetime.datetime.now(),len(findices)))
@@ -59,12 +61,20 @@ for iter in findices:
     dummy1 = interpolate_x(uprime)
     dummy2 = interpolate_y(V)
     dummy3 = interpolate_z(W)
+    # Compute required quantities
     uvplan[0:-1,iterind] = np.nanmean(dummy1[:,0:-1,:]*dummy2[0:-1,:,:],axis=(0,2))
     urms[:,iterind] = np.sqrt(np.nanmean(uprime**2,axis=(0,2)))
     vrms[:,iterind] = np.sqrt(np.nanmean(dummy2**2,axis=(0,2)))
     wrms[:,iterind] = np.sqrt(np.nanmean(dummy3**2,axis=(0,2)))
+    tke[:,iterind] = np.nanmean(0.5*(dummy1[0:Nx,0:Ny,0:Nz]**2 + \
+                                     dummy2[0:Nx,0:Ny,0:Nz]**2 + \
+                                     dummy3[0:Nx,0:Ny,0:Nz]**2), axis=(0,2))
     # Compute derivatives [cell-centers common locations]
     [dudx, dvdx, dwdx, dudy, dvdy, dwdy, dudz, dvdz, dwdz] = allgradient(dummy1,dummy2,dummy3,xm,ym,zm)
+    dummy4 = tkedissipation(1e-6,dudx[0:Nx,0:Ny,0:Nz],dudy[0:Nx,0:Ny,0:Nz],dudz[0:Nx,0:Ny,0:Nz], \
+                             dvdx[0:Nx,0:Ny,0:Nz],dvdy[0:Nx,0:Ny,0:Nz],dvdz[0:Nx,0:Ny,0:Nz], \
+                             dwdx[0:Nx,0:Ny,0:Nz],dwdy[0:Nx,0:Ny,0:Nz],dwdz[0:Nx,0:Ny,0:Nz])
+    epsilon[:,iterind] = np.nanmean(dummy4,axis=(0,2))
     # Finalise the time step
     iterind += 1
     eitime = time.time()
@@ -78,6 +88,8 @@ if(savedata==1):
     np.savetxt('urms.dat',urms)
     np.savetxt('vrms.dat',vrms)
     np.savetxt('wrms.dat',wrms)
+    np.savetxt('tke.dat',tke)
+    np.savetxt('epsilon.dat',epsilon)
 # Exit message
 etime=time.time()
 gracefulexit(stime,etime)
