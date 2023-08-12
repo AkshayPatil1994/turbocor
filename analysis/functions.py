@@ -179,6 +179,40 @@ def interpolate_y(uin):
     uout[0:nusize[0],0:nusize[1]-1,0:nusize[2]] = 0.5*(uin[:,0:nusize[1]-1,:]+uin[:,1:nusize[1],:])
 
     return uout
+#
+# All gradient computations
+#
+def allgradient(u,v,w,x,y,z):
+    '''
+        This function computes the gradient for given u,v,w velocities in all directions using first order accurate scheme
+    INPUT
+        u,v,w:  [3D numpy arrays] Velocity arrays
+        x,y,z:  [1D numpy arrays] Cartesian coordinates
+    OUTPUT
+        djui:   [3D numpy arrays] Gradient arrays corresponding to all the components [9 in total]
+    '''
+    # Check size of the input arrays
+    nu = np.shape(u)
+    nv = np.shape(v)
+    nw = np.shape(w)
+    # Initialise data
+    dudx, dvdx, dwdx = np.zeros(nu), np.zeros(nv), np.zeros(nw)
+    dudy, dvdy, dwdy = np.zeros(nu), np.zeros(nv), np.zeros(nw)
+    dudz, dvdz, dwdz = np.zeros(nu), np.zeros(nv), np.zeros(nw)
+    # Gradient of u
+    dudx = np.gradient(u,axis=0) / np.gradient(x)
+    dudy = np.gradient(u,axis=1) / np.gradient(y)
+    dudz = np.gradient(u,axis=2) / np.gradient(z)
+    # Gradient of v
+    dvdx = np.gradient(v,axis=0) / np.gradient(x)
+    dvdy = np.gradient(v,axis=1) / np.gradient(y)
+    dvdz = np.gradient(v,axis=2) / np.gradient(z)
+    # Gradient of w
+    dwdx = np.gradient(w,axis=0) / np.gradient(x)
+    dwdy = np.gradient(w,axis=1) / np.gradient(y)
+    dwdz = np.gradient(w,axis=2) / np.gradient(z)
+
+    return dudx, dvdx, dwdx, dudy, dvdy, dwdy, dudz, dvdz, dwdz 
 
 #
 # Welcome message for analysis

@@ -1,6 +1,6 @@
 import numpy as np
 from functions import welcomemessage, gracefulexit, readField, readmask, readinput, maskdata, \
-                      interpolate_x, interpolate_y, interpolate_z
+                      interpolate_x, interpolate_y, interpolate_z, allgradient
 import os
 import time
 import datetime
@@ -61,6 +61,8 @@ for iter in findices:
     urms[:,iterind] = np.sqrt(np.nanmean(uprime**2,axis=(0,2)))
     vrms[:,iterind] = np.sqrt(np.nanmean(dummy2**2,axis=(0,2)))
     wrms[:,iterind] = np.sqrt(np.nanmean(dummy3**2,axis=(0,2)))
+    # Compute derivatives [cell-centers common locations]
+    [dudx, dvdx, dwdx, dudy, dvdy, dwdy, dudz, dvdz, dwdz] = allgradient(dummy1,dummy2,dummy3,xm,ym,zm)
     # Finalise the time step
     iterind += 1
     eitime = time.time()
