@@ -199,18 +199,26 @@ def allgradient(u,v,w,x,y,z):
     dudx, dvdx, dwdx = np.zeros(nu), np.zeros(nv), np.zeros(nw)
     dudy, dvdy, dwdy = np.zeros(nu), np.zeros(nv), np.zeros(nw)
     dudz, dvdz, dwdz = np.zeros(nu), np.zeros(nv), np.zeros(nw)
-    # Gradient of u
-    dudx = np.gradient(u,axis=0) / np.gradient(x)
-    dudy = np.gradient(u,axis=1) / np.gradient(y)
-    dudz = np.gradient(u,axis=2) / np.gradient(z)
-    # Gradient of v
-    dvdx = np.gradient(v,axis=0) / np.gradient(x)
-    dvdy = np.gradient(v,axis=1) / np.gradient(y)
-    dvdz = np.gradient(v,axis=2) / np.gradient(z)
-    # Gradient of w
-    dwdx = np.gradient(w,axis=0) / np.gradient(x)
-    dwdy = np.gradient(w,axis=1) / np.gradient(y)
-    dwdz = np.gradient(w,axis=2) / np.gradient(z)
+    # Compute the grid size
+    dx = x[10] - x[9]
+    dy = np.gradient(y,edge_order=1)
+    dz = z[10] - z[9]
+    # Gradients in x
+    dudx[0:nu[0]-1,:,:] = (u[1:nu[0],:,:] - u[0:nu[0]-1,:,:])/dx
+    dvdx[0:nv[0]-1,:,:] = (v[1:nv[0],:,:] - v[0:nv[0]-1,:,:])/dx
+    dwdx[0:nw[0]-1,:,:] = (w[1:nw[0],:,:] - w[0:nw[0]-1,:,:])/dx
+    # Gradient in y
+    dudy[:,0:nu[1]-2,:] = (u[:,1:nu[1]-1,:] - u[:,0:nu[1]-2,:])/dy[:,np.newaxis]
+    dvdy[:,0:nv[1]-2,:] = (v[:,1:nv[1]-1,:] - v[:,0:nv[1]-2,:])/dy[0:nv[1]-2,np.newaxis]
+    dwdy[:,0:nw[1]-2,:] = (w[:,1:nw[1]-1,:] - w[:,0:nw[1]-2,:])/dy[:,np.newaxis]
+    # Gradients in z
+    dudz[:,:,1:nw[2]] = (u[:,:,1:nw[2]] - u[:,:,0:nw[2]-1])/dz
+    dvdz[:,:,1:nw[2]] = (v[:,:,1:nw[2]] - v[:,:,0:nw[2]-1])/dz
+    dwdz[:,:,1:nw[2]] = (w[:,:,1:nw[2]] - w[:,:,0:nw[2]-1])/dz
+    # Handling end points
+    dudx[-1,:,:], dvdx[-1,:,:], dwdx[-1,:,:] = dudx[-2,:,:], dvdx[-2,:,:], dwdx[-2,:,:]
+    dudy[:,-1,:], dvdx[:,-1,:], dwdx[:,-1,:] = dudx[:,-2,:], dvdx[:,-2,:], dwdx[:,-2,:]
+    dudz[:,:,-1], dvdx[:,:,-1], dwdx[:,:,-1] = dudx[:,:,-2], dvdx[:,:,-2], dwdx[:,:,-2]
 
     return dudx, dvdx, dwdx, dudy, dvdy, dwdy, dudz, dvdz, dwdz 
 

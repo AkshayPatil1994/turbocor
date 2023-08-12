@@ -70,11 +70,11 @@ for iter in findices:
 # Write data to file
 print("- - - - - - - - - - - - - - ")
 print("Writing analysis results to file. . .")
-np.savetxt('Uplan.dat',Uplan)
-np.savetxt('uv.dat',uvplan)
-np.savetxt('urms.dat',urms)
-np.savetxt('vrms.dat',vrms)
-np.savetxt('wrms.dat',wrms)
+# np.savetxt('Uplan.dat',Uplan)
+# np.savetxt('uv.dat',uvplan)
+# np.savetxt('urms.dat',urms)
+# np.savetxt('vrms.dat',vrms)
+# np.savetxt('wrms.dat',wrms)
 # Exit message
 etime=time.time()
 gracefulexit(stime,etime)
