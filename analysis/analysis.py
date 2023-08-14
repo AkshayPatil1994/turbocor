@@ -83,6 +83,8 @@ for iter in findices:
 print("- - - - - - - - - - - - - - ")
 print("Writing analysis results to file. . .")
 if(savedata==1):
+    np.savetxt('y.dat',y)
+    np.savetxt('ym.dat',ym)
     np.savetxt('Uplan.dat',Uplan)
     np.savetxt('uv.dat',uvplan)
     np.savetxt('urms.dat',urms)
