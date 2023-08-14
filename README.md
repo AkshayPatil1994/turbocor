@@ -22,16 +22,16 @@ pip install -r requirements.txt
 
 The wave-roughness parameters are listed in the table and the figure below. The figure demarcations are adapted from Lacy and McVean (2016). The values within the table below were generated using the `preprocessing/generateCoralBed/param_space.py` script.
 
-| Case Name | $Re_w$ [-] | $A/k_s$ [-] | $U_b$ [m/s] | $T_w$ [s] | $k_s$ [m] | Status | Storage Location | Backup |
-|:---------:|:----:|:-------:|:-----------:|:---------:|:---------:|:---------:|:--------------:|:--------:|
-| c1        | 351  |    1    | 0.021002    |    5      | 0.016713  | Completed | Noether [sto2] | ICT storage |
-| c2        | 351  |    1    | 0.012125    |    15     | 0.028947  | Completed | Noether [sto2] | ICT storage |
-| c3        | 3990 |    1    | 0.070809    |    5      | 0.056348  | Running   | surf           | Pending     |
-| c4        | 3990 |    1    | 0.040882    |    15     | 0.097598  | Running   | surf           | Pending     |
-| c5        | 351  |    0.5  | 0.021002    |    5      | 0.033426  | Completed | Noether [sto1] | ICT storage |
-| c6        | 351  |    0.5  | 0.012125    |    15     | 0.057895  | Completed | Noether [sto1] | ICT storage |
-| c7        | 3990 |    0.5  | 0.070809    |    5      | 0.112697  | Pending   |                |             |     
-| c8        | 3990 |    0.5  | 0.040882    |    15     | 0.195197  | Pending   |                |             |
+| Case Name | $Re_w$ [-] | $A/k_s$ [-] | $Re_k^b$ [-] | $U_b$ [m/s] | $T_w$ [s] | $k_s$ [m] | Status | Storage Location | Backup |
+|:---------:|:----:|:-------:|:-----:|:-----------:|:---------:|:---------:|:---------:|:--------------:|:--------:|
+| c1        | 351  |    1    | 702 |  0.021002    |    5      | 0.016713  | Completed | Noether [sto2] | ICT storage |
+| c2        | 351  |    1    | 702 |  0.012125    |    15     | 0.028947  | Completed | Noether [sto2] | ICT storage |
+| c3        | 3990 |    1    | 7980 |  0.070809    |    5      | 0.056348  | Running   | surf           | Pending     |
+| c4        | 3990 |    1    | 7980 |  0.040882    |    15     | 0.097598  | Running   | surf           | Pending     |
+| c5        | 351  |    0.5  | 351 |  0.021002    |    5      | 0.033426  | Completed | Noether [sto1] | ICT storage |
+| c6        | 351  |    0.5  | 351 |  0.012125    |    15     | 0.057895  | Completed | Noether [sto1] | ICT storage |
+| c7        | 3990 |    0.5  | 3990 |  0.070809    |    5      | 0.112697  | Pending   |                |             |     
+| c8        | 3990 |    0.5  | 3990 | 0.040882    |    15     | 0.195197  | Pending   |                |             |
 
 <img src="assets/pspace.png" height=500>
 

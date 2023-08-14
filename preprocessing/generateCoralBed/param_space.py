@@ -61,4 +61,17 @@ plt.xlabel(r'$Re_w$',fontsize=40)
 plt.ylabel(r'$A/k_s$',fontsize=40)
 plt.legend()
 plt.grid()
-plt.show()
+
+# Rek plot
+# fixPlot(thickness=2.0, fontsize=15, markersize=10, labelsize=30, texuse=False)
+# plt.figure(2,figsize=(10,10))
+
+# plt.axis('square')
+# plt.xlabel(r'$Re_k^{b}$',fontsize=40)
+# plt.ylabel(r'$A/k_s$',fontsize=40)
+# plt.legend()
+# plt.grid()
+
+# plt.show()
+for indd in range(0,len(ks)):
+    print(ks[indd]*Ub[indd]*(1/nu))
