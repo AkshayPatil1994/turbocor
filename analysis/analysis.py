@@ -6,6 +6,8 @@ import time
 import datetime
 # Save data prompt
 savedata = 1
+# Kinematic viscosity used to compute dissipation
+kviscosity = 1e-6   
 #
 # Read input parameters
 #
@@ -71,7 +73,7 @@ for iter in findices:
                                      dummy3[0:Nx,0:Ny,0:Nz]**2), axis=(0,2))
     # Compute derivatives [cell-centers common locations]
     [dudx, dvdx, dwdx, dudy, dvdy, dwdy, dudz, dvdz, dwdz] = allgradient(dummy1,dummy2,dummy3,xm,ym,zm)
-    dummy4 = tkedissipation(1e-6,dudx[0:Nx,0:Ny,0:Nz],dudy[0:Nx,0:Ny,0:Nz],dudz[0:Nx,0:Ny,0:Nz], \
+    dummy4 = tkedissipation(kviscosity,dudx[0:Nx,0:Ny,0:Nz],dudy[0:Nx,0:Ny,0:Nz],dudz[0:Nx,0:Ny,0:Nz], \
                              dvdx[0:Nx,0:Ny,0:Nz],dvdy[0:Nx,0:Ny,0:Nz],dvdz[0:Nx,0:Ny,0:Nz], \
                              dwdx[0:Nx,0:Ny,0:Nz],dwdy[0:Nx,0:Ny,0:Nz],dwdz[0:Nx,0:Ny,0:Nz])
     epsilon[:,iterind] = np.nanmean(dummy4,axis=(0,2))
