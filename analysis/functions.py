@@ -233,7 +233,7 @@ def tkedissipation(kvisc,dudx,dudy,dudz,dvdx,dvdy,dvdz,dwdx,dwdy,dwdz):
     OUTPUT
         epsilon:    [3D numpy array] TKE dissipation rate
     '''
-    epsilon = 0.5*kvisc*(dudx**2 + dudy**2 + dudz**2 + dvdx**2 + dvdy**2 + dvdz**2 + dwdx**2 + dwdy**2 + dwdz**2)
+    epsilon = kvisc*(dudx**2 + dudy**2 + dudz**2 + dvdx**2 + dvdy**2 + dvdz**2 + dwdx**2 + dwdy**2 + dwdz**2)
 
     return epsilon
 #
