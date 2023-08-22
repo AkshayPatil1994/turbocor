@@ -271,6 +271,22 @@ def fixDataOrder(datain,nphases,nwaves):
 
     return datain
 #
+# Write array to binary file
+#
+def write2File(data,fileout):
+    '''
+        This function writes the numpy array to a binary file
+    INPUT
+        data:       [Numpy array] data array to be written to file
+        fileout:    [string] name of the file with the full path
+    '''
+    data = np.asfortranarray(data)	        # Cast as column major array
+    data = data.flatten(order='F')	        # Flatten it to make FORTRAN binary compatible
+    # write the array to a binary file
+    with open(fileout, 'wb') as f:
+        data.tofile(f)
+    f.close()
+#
 # Set default plotting size
 #
 def fixPlot(thickness=1.5, fontsize=20, markersize=8, labelsize=15, texuse=False, tickSize = 15):
