@@ -3,6 +3,7 @@
 # 
 import numpy as np
 import datetime
+import matplotlib.pyplot as plt
 #
 # Define the function to read the binary snapshot
 #
@@ -236,6 +237,68 @@ def tkedissipation(kvisc,dudx,dudy,dudz,dvdx,dvdy,dvdz,dwdx,dwdy,dwdz):
     epsilon = kvisc*(dudx**2 + dudy**2 + dudz**2 + dvdx**2 + dvdy**2 + dvdz**2 + dwdx**2 + dwdy**2 + dwdz**2)
 
     return epsilon
+#
+# Fix data order from phaseBudget
+#
+def fixDataOrder(datain,nphases,nwaves):
+    '''
+        This function fixes the ordering of the results array generated using `phaseBudget.py`
+    INPUT
+        datain:     [numpy array] input array that needs fixing
+        nphases:    [integer] number of phases
+        nwaves:     [integer] number of waves
+    OUTPUT
+        datain: Returns the input array after fixing the indices
+    '''
+    datasize=np.shape(datain)
+    dummy = np.zeros(datasize)
+    sind = 0; indexstart = 0; indexend = nwaves
+    # Re-arrange data as time and not phase
+    for myphase in range(0,nphases):
+        # Setup the right phase file to be loaded
+        if(myphase == nphases-1):
+            phases = np.arange(sind,datasize[1]+1,nphases)
+        else:
+            phases = np.arange(sind,datasize[1],nphases)
+        # First set dummy as empty array
+        dummy[:,phases] = datain[:,indexstart:indexend]
+        # print(len(phases),np.shape(tke[:,indexstart:indexend]),indexstart,indexend)
+        indexstart = indexend
+        indexend += nwaves
+        sind += 1
+    # Set the dummy data as original data
+    datain = dummy
+
+    return datain
+#
+# Set default plotting size
+#
+def fixPlot(thickness=1.5, fontsize=20, markersize=8, labelsize=15, texuse=False, tickSize = 15):
+    '''
+        This plot sets the default plot parameters
+    INPUT
+        thickness:      [float] Default thickness of the axes lines
+        fontsize:       [integer] Default fontsize of the axes labels
+        markersize:     [integer] Default markersize
+        labelsize:      [integer] Default label size
+    OUTPUT
+        None
+    '''
+    # Set the thickness of plot axes
+    plt.rcParams['axes.linewidth'] = thickness    
+    # Set the default fontsize
+    plt.rcParams['font.size'] = fontsize    
+    # Set the default markersize
+    plt.rcParams['lines.markersize'] = markersize    
+    # Set the axes label size
+    plt.rcParams['axes.labelsize'] = labelsize
+    # Enable LaTeX rendering
+    plt.rcParams['text.usetex'] = texuse
+    # Tick size
+    plt.rcParams['xtick.major.size'] = tickSize
+    plt.rcParams['ytick.major.size'] = tickSize
+    plt.rcParams['xtick.direction'] = 'in'
+    plt.rcParams['ytick.direction'] = 'in'
 #
 # Welcome message for analysis
 #
