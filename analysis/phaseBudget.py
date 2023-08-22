@@ -96,11 +96,11 @@ for myphase in range(0,nphases):
         V = maskdata(V,Vmask)
         W = maskdata(W,Wmask)
         P = maskdata(P,Pmask)
-        # Isolate turbulent components
-        ut = U - Uphase
-        vt = V - Vphase
-        wt = W - Wphase
-        pt = P - Pphase
+        # Isolate turbulent components (Uphase/nwaves is the actual phase-average)
+        ut = U - Uphase/nwaves
+        vt = V - Vphase/nwaves
+        wt = W - Wphase/nwaves
+        pt = P - Pphase/nwaves
         # Compute the turbulent rms component (phase averaged!!!)
         urms += ut**2
         vrms += vt**2
