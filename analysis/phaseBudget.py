@@ -96,15 +96,20 @@ for myphase in range(0,nphases):
         V = maskdata(V,Vmask)
         W = maskdata(W,Wmask)
         P = maskdata(P,Pmask)
+        # Isolate turbulent components
+        ut = U - Uphase
+        vt = V - Vphase
+        wt = W - Wphase
+        pt = P - Pphase
         # Compute the turbulent rms component (phase averaged!!!)
-        urms += (U - Uphase)**2
-        vrms += (V - Vphase)**2
-        wrms += (W - Wphase)**2
-        prms += (P - Pphase)**2
+        urms += ut**2
+        vrms += vt**2
+        wrms += wt**2
+        prms += pt**2
         # Interpolate u', v', and w' to cell centers
-        dummy1 = interpolate_x(U - Uphase)
-        dummy2 = interpolate_y(V - Vphase)
-        dummy3 = interpolate_z(W - Wphase)
+        dummy1 = interpolate_x(ut)
+        dummy2 = interpolate_y(vt)
+        dummy3 = interpolate_z(wt)
         # Compute cross terms (uv and tke)
         uv[0:Nx,0:Ny,0:Nz] += dummy1[0:Nx,0:Ny,0:Nz]*dummy2[0:Nx,0:Ny,0:Nz]
         tke[0:Nx,0:Ny,0:Nz] += 0.5*(dummy1[0:Nx,0:Ny,0:Nz]**2 + \
@@ -118,10 +123,10 @@ for myphase in range(0,nphases):
                                 dwdx[0:Nx,0:Ny,0:Nz],dwdy[0:Nx,0:Ny,0:Nz],dwdz[0:Nx,0:Ny,0:Nz])
         # Planform average to store the stats for time series
         uplan_ts[:,giterind] = np.nanmean(U,axis=(0,2))
-        urms_ts[:,giterind] = np.sqrt(np.nanmean((U - Uphase)**2,axis=(0,2)))
-        vrms_ts[:,giterind] = np.sqrt(np.nanmean((V - Vphase)**2,axis=(0,2)))
-        wrms_ts[:,giterind] = np.sqrt(np.nanmean((W - Wphase)**2,axis=(0,2)))
-        prms_ts[:,giterind] = np.sqrt(np.nanmean((P - Pphase)**2,axis=(0,2)))
+        urms_ts[:,giterind] = np.sqrt(np.nanmean(ut**2,axis=(0,2)))
+        vrms_ts[:,giterind] = np.sqrt(np.nanmean(vt**2,axis=(0,2)))
+        wrms_ts[:,giterind] = np.sqrt(np.nanmean(wt**2,axis=(0,2)))
+        prms_ts[:,giterind] = np.sqrt(np.nanmean(pt**2,axis=(0,2)))
         uv_ts[0:Ny,giterind] = np.nanmean(dummy1[:,0:-1,:]*dummy2[0:-1,:,:],axis=(0,2))
         tke_ts[0:Ny,giterind] = np.nanmean(0.5*(dummy1[0:Nx,0:Ny,0:Nz]**2 + \
                                      dummy2[0:Nx,0:Ny,0:Nz]**2 + \
@@ -165,6 +170,7 @@ if(savetimeseries==1):
     np.savetxt('data/urms_timeseries.dat',urms_ts)
     np.savetxt('data/vrms_timeseries.dat',vrms_ts)
     np.savetxt('data/wrms_timeseries.dat',wrms_ts)
+    np.savetxt('data/prms_timeseries.dat',prms_ts)
     np.savetxt('data/tke_timeseries.dat',tke_ts)
     np.savetxt('data/epsilon_timeseries.dat',epsilon_ts)
 # Exit message
