@@ -26,7 +26,7 @@ The wave-roughness parameters are listed in the table and the figure below. The 
 |:---------:|:----:|:-------:|:-----:|:-----------:|:---------:|:---------:|:---------:|:--------------:|:--------:|
 | c1        | 351  |    1    | 351 |  0.021002    |    5      | 0.016713  | Completed | Noether [sto2] | ICT storage |
 | c2        | 351  |    1    | 351 |  0.012125    |    15     | 0.028947  | Completed | Noether [sto2] | ICT storage |
-| c3        | 3990 |    1    | 3990 |  0.070809    |    5      | 0.056348  | Running   | surf           | Pending     |
+| c3        | 3990 |    1    | 3990 |  0.070809    |    5      | 0.056348  | Completed | Foote [data]  | Pending     |
 | c4        | 3990 |    1    | 3990 |  0.040882    |    15     | 0.097598  | Running   | surf           | Pending     |
 | c5        | 351  |    0.5  | 702 |  0.021002    |    5      | 0.033426  | Completed | Noether [sto1] | ICT storage |
 | c6        | 351  |    0.5  | 702 |  0.012125    |    15     | 0.057895  | Completed | Noether [sto1] | ICT storage |
