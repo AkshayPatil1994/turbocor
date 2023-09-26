@@ -31,7 +31,7 @@ The wave-roughness parameters are listed in the table and the figure below. The 
 | c5        | 351  |    0.5  | 702 |  0.021002    |    5      | 0.033426  | Completed  | Noether [sto1] | ICT storage |
 | c6        | 351  |    0.5  | 702 |  0.012125    |    15     | 0.057895  | Completed  | Noether [sto1] | ICT storage |
 | c7        | 3990 |    0.5  | 7980 |  0.070809    |    5      | 0.112697  | Running   |    surf       |      Pending |     
-| c8        | 3990 |    0.5  | 7980 | 0.040882    |    15     | 0.195197  | Pending    |                |             |
+| c8        | 3990 |    0.5  | 7980 | 0.040882    |    15     | 0.195197  | Running    |    surf       |   Pending    |
 
 <img src="assets/pspace.png" height=500>
 
