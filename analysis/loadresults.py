@@ -6,7 +6,7 @@ import cmocean
 # User input data
 #
 yloc = 10
-filename = '../fields/channel_test.23200'
+filename = '../run/fields/channel_test.115200'
 #
 # Load data
 #
