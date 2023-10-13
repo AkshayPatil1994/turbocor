@@ -381,4 +381,4 @@ def gracefulexit(stime,etime):
     print("- - - - - - - - - - - - - - ")
     print("Ending analysis time loop on: %s"%(datetime.datetime.now()))
     print("Total Analysis Time: %f hours"%((etime-stime)/3600))
-    print("*** Dopamine squence analysed ***")
+    print("*** Dopamine sequence analysed ***")
