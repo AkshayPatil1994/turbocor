@@ -38,7 +38,7 @@ The wave-roughness parameters are listed in the table and the figure below. The 
 
 
 <p align="center">
-<img src="assets/figure1.png" height=500>
+<img src="assets/figure1.png" height=300>
 </p>
 <p align="center">
 <img src="assets/coral_turbulence.png" height=600>
